@@ -58,6 +58,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   map<string, string> vars;
   vars["classname"] = classname_;
   vars["short_name"] = descriptor_->name();
+  vars["value_count"] = SimpleItoa(descriptor_->value_count());
 
   printer->Print(vars, "enum $classname$ {\n");
   printer->Indent();
@@ -99,6 +100,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
     "const $classname$ $prefix$$short_name$_MIN = $prefix$$min_name$;\n"
     "const $classname$ $prefix$$short_name$_MAX = $prefix$$max_name$;\n"
     "const int $prefix$$short_name$_ARRAYSIZE = $prefix$$short_name$_MAX + 1;\n"
+    "const int $prefix$$short_name$_VALUE_COUNT = $value_count$;\n"
     "\n");
 
   if (HasDescriptorMethods(descriptor_->file())) {
